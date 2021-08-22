@@ -23,6 +23,42 @@ Row추가삭제
 https://www.ag-grid.com/javascript-data-grid/view-refresh/
 row칼라 다시설정하기
 
+==================================================================
+https://www.ag-grid.com/javascript-data-grid/value-formatters/
+Value Formatter Example ::컬럼데이터를 바꾸어서 보여주고 싶을때
+123 ==> (123) / $123 / 1-2-3
+columnDefs: [
+    { headerName: 'A', field: 'a' },
+    { headerName: 'B', field: 'b' },
+    { headerName: '£A', field: 'a', valueFormatter: currencyFormatter },
+    { headerName: '£B', field: 'b', valueFormatter: currencyFormatter },
+    { headerName: '(A)', field: 'a', valueFormatter: bracketsFormatter },
+    { headerName: '(B)', field: 'b', valueFormatter: bracketsFormatter },
+  ],
+
+function bracketsFormatter(params) {
+  return '(' + params.value + ')';
+}
+
+function currencyFormatter(params) {
+  return '£' + formatNumber(params.value);
+}
+==================================================================
+https://www.ag-grid.com/javascript-data-grid/component-cell-renderer/#cell-renderer-function
+Cell Renderer : 셀에 html요소 넣고 싶을때
+
+==================================================================
+https://www.ag-grid.com/javascript-data-grid/cell-editing/#full-row-editing
+편집용row 임을 보여줄때...  addRow 이후에..이건 편집용임을 보여주고 싶을때
+
+function onBtStartEditing() {
+  gridOptions.api.setFocusedCell(2, 'make');
+  gridOptions.api.startEditingCell({
+    rowIndex: 2,
+    colKey: 'make',
+  });
+}
+==================================================================
 https://www.ag-grid.com/javascript-data-grid/column-properties/#reference-events
 onCellValueChanged
 
