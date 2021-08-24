@@ -7,13 +7,28 @@ const object1 = {
   console.log(Object.values(object1));
   // expected output: Array ["somestring", 42, false]
   ///////////////////////////////////////////////////////////////////////////////////////
-  const param  =[{a:'aa',b:10,rowType:'addRow',idx:0},{a:'cc',b:30,rowType:'addRow',idx:2}];
-  const rowData=[{a:'aa',b:10,rowType:'addRow',idx:0},{a:'bb',b:20,rowType:'addRow',idx:1},{a:'cc',b:30,rowType:'addRow',idx:2}];
+  const param  =[
+        {a:'aa',b:10,rowType:'addRow',idx:0},
+        {a:'bb',b:20,rowType:'addRow',idx:1},
+        {a:'cc',b:30,rowType:'addRow',idx:2},
+        {a:'dd',b:40,rowType:'getRow',idx:3},
+    ];
+  const paramreverse = [...param].reverse(); //param배열을 뒤집기
+  const rowData=[
+        {a:'aa',b:10,rowType:'addRow',idx:0},
+        {a:'bb',b:20,rowType:'addRow',idx:1},
+        {a:'cc',b:30,rowType:'addRow',idx:2},
+        {a:'dd',b:40,rowType:'getRow',idx:3},
+        {a:'ee',b:50,rowType:'getRow',idx:4},
+    ];
   const rowDataCopy = rowData.map(row=>row);
   
-  param.forEach( row =>{
+  let newParam = [];
+  paramreverse.forEach( (row, idxParam) =>{
     if(row.rowType === 'addRow'){
         rowDataCopy.splice(row.idx,1);
+    }else{
+        newParam.push(row);
     }
   });
   
@@ -21,6 +36,8 @@ const object1 = {
   console.log(rowData);
   console.log("정리된데이터");
   console.log(rowDataCopy);
+  console.log("Param데이터");
+  console.log(newParam);
   
   ///////////////////////////////////////////////////////////////////////////////////////
 //   const rowData=[{a:'aa',b:10,rowType:'addRow'},{a:'bb',b:20,rowType:'addRow'},{a:'cc',b:30,rowType:'addRow'}];
