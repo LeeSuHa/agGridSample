@@ -1,3 +1,75 @@
+////////////////////////////////
+컬럼싸이즈 지정
+var colSpan = function (params) {
+  return params.data === 2 ? 3 : 1;
+};
+
+var columnDefs = [
+  {
+    headerName: 'A',
+    field: 'author',
+    width: 300,
+    colSpan: colSpan,
+  },
+  {
+    headerName: 'Flexed Columns',
+    children: [
+      {
+        headerName: 'B',
+        minWidth: 200,
+        maxWidth: 350,
+        flex: 2,
+      },
+      {
+        headerName: 'C',
+        flex: 1,
+      },
+    ],
+  },
+];
+
+function fillAllCellsWithWidthMeasurement() {
+  Array.prototype.slice
+    .call(document.querySelectorAll('.ag-cell'))
+    .forEach(function (cell) {
+      var width = cell.offsetWidth;
+      var isFullWidthRow = cell.parentElement.childNodes.length === 1;
+      cell.textContent = (isFullWidthRow ? 'Total width: ' : '') + width + 'px';
+    });
+}
+
+var gridOptions = {
+  defaultColDef: {
+    resizable: true,
+  },
+  columnDefs: columnDefs,
+  rowData: [1, 2],
+  onGridReady: function () {
+    setInterval(fillAllCellsWithWidthMeasurement, 50);
+  },
+};
+
+
+///////////////////////////
+헤더그룹 클래스지정
+columnDefs: [
+    // the CSS class name supplied to 'headerClass' will get applied to the header group
+    { headerName: 'Athlete Details', headerClass: 'my-css-class', children: []}
+],
+
+
+////////////////////////
+컬럼명가져오기
+function onPrintColumns() {
+  var cols = gridOptions.columnApi.getAllGridColumns();
+  var colToNameFunc = function (col, index) {
+    return index + ' = ' + col.getId();
+  };
+  var colNames = cols.map(colToNameFunc).join(', ');
+  console.log('columns are: ' + colNames);
+}
+
+
 ///////////////////////////////////
 팝업으로 시설번호, 즉key값 변경할때.. 중복 체크
 const rowData=[
