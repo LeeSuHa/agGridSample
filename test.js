@@ -1,3 +1,30 @@
+
+////////////////////////////////
+선택시 이벤트 처리.. 순서대로 발생됨.
+  onRowSelected: onRowSelected,
+  onSelectionChanged: onSelectionChanged,
+  
+  function onRowSelected(event) {
+  window.alert(
+    'row ' + event.node.data.athlete + ' selected = ' + event.node.isSelected()
+  );
+}
+
+function onSelectionChanged(event) {
+  var rowCount = event.api.getSelectedNodes().length;
+  window.alert('selection changed, ' + rowCount + ' rows selected');
+}
+////////////////////////////////
+체크박스 표현가능한 Row지정옵션
+  isRowSelectable: function (rowNode) {
+    return rowNode.data ? rowNode.data.year < 2007 : false;
+  },
+////////////////////////////////
+그리드 hover 해제..로우셀렉트 컬럼셀렉트 모두
+
+  columnHoverHighlight: false,//true,
+  suppressRowHoverHighlight:true,
+
 ////////////////////////////////
 컬럼싸이즈 지정
 var colSpan = function (params) {
@@ -69,6 +96,24 @@ function onPrintColumns() {
   console.log('columns are: ' + colNames);
 }
 
+
+///////////////////////////////////
+자바스크립트 변수상태
+var aaa1 = function(params) {
+    return params*2;
+};
+var aaa2 = (params) => params*2;
+
+var test = "aa";
+var test2 = ['a','b'];
+var test3 = {aa:1, bb:2};
+console.log(  aaa1    );   // [Function: aaa1]
+console.log(  aaa1(4) );   // 8
+console.log(  aaa2    );   // [Function: aaa2]
+console.log(  aaa2(4) );   // 8
+console.log(  test    );   // aa
+console.log(  test2   );   // [ 'a', 'b' ]
+console.log(  test3   );   // { aa: 1, bb: 2 }
 
 ///////////////////////////////////
 팝업으로 시설번호, 즉key값 변경할때.. 중복 체크
